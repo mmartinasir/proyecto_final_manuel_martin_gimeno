@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `pedidos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedidos` (
   `IDpedido` varchar(100) NOT NULL,
-  `IDlibro` varchar(100) DEFAULT NULL,
+  `IDlibro` int DEFAULT NULL,
   `IDusuario` varchar(100) DEFAULT NULL,
   `fecha_pedido` date DEFAULT NULL,
   PRIMARY KEY (`IDpedido`),
