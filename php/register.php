@@ -40,13 +40,39 @@
         printf("Connection failed: %s\n", $connection->connect_error);
       exit();
  }
+    $buscarusuario = "select * from usuarios where Usuario = '".$_POST['user']."'";
+    $buscaremail = "select * from usuarios where Email = '".$_POST['email']."'";
 
-   $usuario=$_POST['user'];
-   $consulta= "INSERT INTO usuarios (Usuario, Nombre, Email, Telefono, password, rol) VALUES('$usuario','".$_POST['nombre']."','".$_POST['email']."','".$_POST['phone']."','".$_POST['password']."','".'cliente'."')";
+    if ($result = $connection->query($buscarusuario)) {
 
-   $result = $connection->query($consulta);
+        //No rows returned
+        if ($result->num_rows===0) {
 
-   if (!$result) {
+        } else {
+          echo "El usuario ya está registrado";
+          exit();
+        }
+
+    }
+
+    if ($result = $connection->query($buscaremail)) {
+
+        //No rows returned
+        if ($result->num_rows===0) {
+
+        } else {
+          echo "El email ya está siendo utilizado por otro usuario.";
+          exit();
+        }
+
+    }
+
+    $usuario=$_POST['user'];
+    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Email, Telefono, password, rol) VALUES('$usuario','".$_POST['nombre']."','".$_POST['email']."','".$_POST['phone']."','".$_POST['password']."','".'cliente'."')";
+
+    $result = $connection->query($consulta);
+
+    if (!$result) {
       echo "Error en la consulta. Contacte con un administrador.";
    } else {
        echo "Usuario creado con exito.";
@@ -55,6 +81,8 @@
  ?>
 
   <?php endif ?>
+
+
 
 
   </body>
