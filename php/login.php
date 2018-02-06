@@ -27,7 +27,7 @@
           //MAKING A SELECT QUERY
           //Password coded with md5 at the database. Look for better options
           $consulta="select * from usuarios where
-          usuario='".$_POST["user"]."' and passwd=md5('".$_POST["password"]."');";
+          usuario='".$_POST["user"]."' and password=md5('".$_POST["password"]."');";
 
           //Test if the query was correct
           //SQL Injection Possible
@@ -42,7 +42,7 @@
                 $_SESSION["usu"]=$_POST["user"];
                 $_SESSION["language"]="es";
 
-                header("Location: index.php");
+                header("Location: userpanel.php");
               }
 
           } else {

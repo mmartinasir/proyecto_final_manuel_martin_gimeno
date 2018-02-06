@@ -68,12 +68,15 @@
     }
 
     $usuario=$_POST['user'];
-    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Email, Telefono, password, rol) VALUES('$usuario','".$_POST['nombre']."','".$_POST['email']."','".$_POST['phone']."','".$_POST['password']."','".'cliente'."')";
+    $pass=md5($_POST['password']);
+    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Email, Telefono, password, rol)
+    VALUES('$usuario','".$_POST['nombre']."','".$_POST['email']."','".$_POST['phone']."','".$pass."','".'cliente'."')";
 
     $result = $connection->query($consulta);
 
     if (!$result) {
       echo "Error en la consulta. Contacte con un administrador.";
+      var_dump($consulta);
    } else {
        echo "Usuario creado con exito.";
    }
