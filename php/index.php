@@ -6,7 +6,7 @@
   if (isset($_SESSION["usu"])) {
     //SESSION ALREADY CREATED
     //SHOW SESSION DATA
-    var_dump($_SESSION);
+    header("Location: userpanel.php");
   } else {
     session_destroy();
     header("Location: login.php");

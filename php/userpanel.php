@@ -28,7 +28,7 @@
               <button class="button" style="vertical-align:middle"><span>Mis Pedidos</span></button>
             </div>
             <div class="">
-              <button class="button" style="vertical-align:middle"><span>Libros disponibles</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='books.php'"><span>Libros disponibles</span></button>
             </div>
 
           </div>
