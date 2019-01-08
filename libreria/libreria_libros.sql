@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `libros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `libros` (
-  `IDLibro` varchar(100) NOT NULL,
-  `titulo` varchar(100) DEFAULT NULL,
-  `paginas` int(11) DEFAULT NULL,
-  `fecha_publicacion` date DEFAULT NULL,
-  `IDeditorial` varchar(100) DEFAULT NULL,
-  `IDautor` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`IDLibro`),
-  KEY `IDeditorial` (`IDeditorial`),
-  KEY `IDautor` (`IDautor`),
-  CONSTRAINT `libros_ibfk_1` FOREIGN KEY (`IDeditorial`) REFERENCES `editorial` (`IDeditorial`),
-  CONSTRAINT `libros_ibfk_2` FOREIGN KEY (`IDautor`) REFERENCES `autor` (`IDautor`)
+  `idlibro` int unsigned auto_increment,
+  `titulo` varchar(100),
+  `paginas` int(11),
+  `fecha_publicacion` date,
+  `ideditorial` int unsigned,
+  `idautor` int unsigned,
+  PRIMARY KEY (`idlibro`),
+  KEY `ideditorial` (`ideditorial`),
+  KEY `idautor` (`idautor`),
+  CONSTRAINT `libros_ibfk_1` FOREIGN KEY (`ideditorial`) REFERENCES `editorial` (`ideditorial`),
+  CONSTRAINT `libros_ibfk_2` FOREIGN KEY (`idautor`) REFERENCES `autor` (`idautor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

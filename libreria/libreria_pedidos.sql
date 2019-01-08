@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedidos` (
-  `IDpedido` varchar(100) NOT NULL,
-  `IDlibro` int DEFAULT NULL,
-  `IDusuario` varchar(100) DEFAULT NULL,
-  `fecha_pedido` date DEFAULT NULL,
-  PRIMARY KEY (`IDpedido`),
-  KEY `IDlibro` (`IDlibro`),
-  KEY `IDusuario` (`IDusuario`),
-  CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`IDlibro`) REFERENCES `libros` (`IDLibro`),
-  CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`IDusuario`) REFERENCES `usuarios` (`IDusuario`)
+  `idpedido` int unsigned auto_increment,
+  `idlibro` int unsigned,
+  `idusuario` int unsigned,
+  `fecha_pedido` date,
+  PRIMARY KEY (`idpedido`),
+  KEY `idlibro` (`idlibro`),
+  KEY `idusuario` (`idusuario`),
+  CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`idlibro`) REFERENCES `libros` (`idlibro`),
+  CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

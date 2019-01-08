@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
-  `IDusuario` int NOT NULL AUTO_INCREMENT,
-  `Usuario` varchar(100) DEFAULT NULL,
-  `Nombre` varchar(1000) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `Telefono` int(11) DEFAULT NULL,
-  `contraseña` varchar(64) DEFAULT NULL,
+  `idusuario` int unsigned auto_increment NOT NULL,
+  `usuario` varchar(100) DEFAULT NULL,
+  `nombre` varchar(1000) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` int(11) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
   `rol` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`IDusuario`)
+  PRIMARY KEY (`idusuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

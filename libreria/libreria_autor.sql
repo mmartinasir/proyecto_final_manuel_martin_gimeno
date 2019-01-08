@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `autor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `autor` (
-  `IDautor` varchar(100) NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  `Apellidos` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`IDautor`)
+  `idautor` int unsigned auto_increment,
+  `nombre` varchar(100),
+  `apellidos` varchar(100),
+  PRIMARY KEY (`idautor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

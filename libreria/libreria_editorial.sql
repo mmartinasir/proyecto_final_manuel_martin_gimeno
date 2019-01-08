@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `editorial`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `editorial` (
-  `IDeditorial` varchar(100) NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`IDeditorial`)
+  `ideditorial` int unsigned auto_increment,
+  `nombre` varchar(100),
+  PRIMARY KEY (`ideditorial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
