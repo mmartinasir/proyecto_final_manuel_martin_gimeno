@@ -4,9 +4,9 @@
   session_start();
 
   if (isset($_SESSION["usu"])) {
-    //SESSION ALREADY CREATED
-    //SHOW SESSION DATA
     header("Location: userpanel.php");
+  } elseif (isset($_SESSION["admin"])) {
+    header("Location: adminpanel.php");
   } else {
     session_destroy();
     header("Location: login.php");

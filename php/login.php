@@ -16,7 +16,7 @@
         if (isset($_POST["user"])) {
 
           //CREATING THE CONNECTION
-          $connection = new mysqli("localhost", "root", "usuario", "libreria");
+          $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
 
           //TESTING IF THE CONNECTION WAS RIGHT
           if ($connection->connect_errno) {
@@ -26,25 +26,30 @@
 
           //MAKING A SELECT QUERY
           //Password coded with md5 at the database. Look for better options
+          $pass=md5($_POST['password']);
           $consulta="select * from usuarios where
-          usuario='".$_POST["user"]."' and password=md5('".$_POST["password"]."');";
+          usuario='".$_POST["user"]."' and password='$pass'";
 
           //Test if the query was correct
           //SQL Injection Possible
           //Check http://php.net/manual/es/mysqli.prepare.php for more security
           if ($result = $connection->query($consulta)) {
-
               //No rows returned
               if ($result->num_rows===0) {
                 echo "LOGIN INVALIDO";
               } else {
                 //VALID LOGIN. SETTING SESSION VARS
-                $_SESSION["usu"]=$_POST["user"];
+                $usuario = $result->fetch_object();
                 $_SESSION["language"]="es";
 
-                header("Location: userpanel.php");
+                if ($usuario->rol == "admin") {
+                  $_SESSION["admin"]=$_POST["user"];
+                  header("Location: adminpanel.php");
+                } else {
+                  header("Location: userpanel.php");
+                  $_SESSION["usu"]=$_POST["user"];
+                }
               }
-
           } else {
             echo "Wrong Query";
           }

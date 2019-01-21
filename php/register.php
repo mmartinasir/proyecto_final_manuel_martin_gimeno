@@ -33,7 +33,7 @@
   <?php else: ?>
 
   <?php
-        $connection = new mysqli("localhost", "root", "usuario", "libreria");
+        $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
 
        //TESTING IF THE CONNECTION WAS RIGHT
        if ($connection->connect_errno) {

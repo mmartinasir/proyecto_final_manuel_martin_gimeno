@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Buscador de libros</title>
+    <title>Administracion de autores</title>
   </head>
   <body>
     <?php
       session_start();
 
-      if (isset($_SESSION["usu"])) {
+      if (isset($_SESSION["admin"])) {
       } else {
         session_destroy();
-        header("Location: login.php");
+        header("Location: userpanel.php");
       }
      ?>
 
@@ -29,32 +29,26 @@
 
        //MAKING A SELECT QUERY
        /* Consultas de selección que devuelven un conjunto de resultados */
-       $query="SELECT * from libros";
-
+       $query="SELECT * from autor";
        if (isset($_POST["buscador"])) {
-         if ($_POST["opcion"]=="titulo") {
-           $query="SELECT * from libros where titulo like '%".$_POST["buscador"]."%'";
-         } elseif ($_POST["opcion"]=="editorial") {
-           $query="SELECT * from libros join editorial on libros.IDeditorial = editorial.IDeditorial
-           where editorial.Nombre like '%".$_POST["buscador"]."%'";
-         } elseif ($_POST["opcion"]=="autor") {
-           $query="SELECT * from libros join autor on libros.IDautor = autor.IDautor
-           where autor.Nombre like '%".$_POST["buscador"]."%'";
+         if ($_POST["opcion"]=="nombre") {
+           $query="SELECT * from autor where nombre like '%".$_POST["buscador"]."%'";
+         } elseif ($_POST["opcion"]=="apellidos") {
+           $query="SELECT * from autor where apellidos like '%".$_POST["buscador"]."%'";
          }
-
        };
 
        if ($result = $connection->query($query)) {
 
-           printf("<p>%d Libros encontrados.</p>", $result->num_rows);
+           printf("<p>%d autores encontrados.</p>", $result->num_rows);
 
        ?>
        <form class="" method="post">
-         <input type="text" name="buscador" value="Buscar libro" required>
+         <input type="text" name="buscador" value="Buscar autor" required>
          <input type="submit" name="" value="Buscar">
-         <input type="radio" name="opcion" value="titulo"><label> Titulo</label>
-         <input type="radio" name="opcion" value="editorial"><label> Editorial</label>
-         <input type="radio" name="opcion" value="autor"><label> Autor</label>
+         <input type="radio" name="opcion" value="nombre"><label> Nombre</label>
+         <input type="radio" name="opcion" value="apellidos"><label> Apellidos</label><br><br>
+         <button type="button" onclick="window.location.href='addautor.php'"><span>Nuevo autor</span></button>
 
        </form><br><br>
 
@@ -62,9 +56,8 @@
       <table style="border:1px solid black">
       <thead>
         <tr>
-          <th>Titulo</th>
-          <th>Paginas</th>
-          <th>Fecha Publicacion</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
       </thead>
 
       <?php
@@ -74,9 +67,10 @@
           while($obj = $result->fetch_object()) {
               //PRINTING EACH ROW
               echo "<tr>";;
-                echo "<td>".$obj->titulo."</td>";
-                echo "<td>".$obj->paginas."</td>";
-                echo "<td>".$obj->fecha_publicacion."</td>";
+                echo "<td>".$obj->nombre."</td>";
+                echo "<td>".$obj->apellidos."</td>";
+                echo "<td>"."<a href='editautor.php?cod=$obj->idautor'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='delautor.php?cod=$obj->idautor'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";
           }
 

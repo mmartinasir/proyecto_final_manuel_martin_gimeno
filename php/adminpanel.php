@@ -3,16 +3,15 @@
   <head>
     <link rel="stylesheet" href="style.css">
     <meta charset="utf-8">
-    <title>Panel de Usuario</title>
+    <title>Panel de Administrador</title>
   </head>
   <body>
     <?php
       session_start();
-      if (isset($_SESSION["usu"])) {
-        echo "Bienvenido, ".$_SESSION["usu"];
+      if (isset($_SESSION["admin"])) {
+        echo "Bienvenido, ".$_SESSION["admin"];
       } else {
-        session_destroy();
-        header("Location: login.php");
+        header("Location: userpanel.php");
       }
      ?>
     <div align = "center">
@@ -28,13 +27,17 @@
               <button class="button" style="vertical-align:middle"><span>Lista de usuarios</span></button>
             </div>
             <div class="">
-              <button class="button" style="vertical-align:middle"><span>Libros</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='adminbook.php'"><span>Libros</span></button>
+
             </div>
             <div class="">
               <button class="button" style="vertical-align:middle"><span>Editoriales</span></button>
             </div>
             <div class="">
-              <button class="button" style="vertical-align:middle"><span>Autores</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='adminautor.php'"><span>Autores</span></button>
+            </div>
+            <div class="">
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='closesession.php'"><span>Cerrar Sesion</span></button>
             </div>
 
           </div>

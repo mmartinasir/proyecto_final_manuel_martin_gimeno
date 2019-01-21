@@ -8,10 +8,10 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["usu"])) {
+      if (isset($_SESSION["admin"])) {
       } else {
         session_destroy();
-        header("Location: login.php");
+        header("Location: userpanel.php");
       }
      ?>
 
@@ -77,6 +77,8 @@
                 echo "<td>".$obj->titulo."</td>";
                 echo "<td>".$obj->paginas."</td>";
                 echo "<td>".$obj->fecha_publicacion."</td>";
+                echo "<td>"."<a href='editbook.php?cod=$obj->idlibro'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='delbook.php?cod=$obj->idlibro'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";
           }
 
