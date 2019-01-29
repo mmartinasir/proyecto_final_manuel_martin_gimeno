@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Administracion de autores</title>
+    <title>Administracion de usuarios</title>
   </head>
   <body>
     <?php
@@ -24,12 +24,12 @@
            exit();
        }
 
-       $query="SELECT * from autor";
+       $query="SELECT * from usuarios where rol = 'cliente'";;
        if (isset($_POST["buscador"])) {
          if ($_POST["opcion"]=="nombre") {
-           $query="SELECT * from autor where nombre like '%".$_POST["buscador"]."%'";
-         } elseif ($_POST["opcion"]=="apellidos") {
-           $query="SELECT * from autor where apellidos like '%".$_POST["buscador"]."%'";
+           $query="SELECT * from usuario where nombre like '%".$_POST["buscador"]."%'";
+         } elseif ($_POST["opcion"]=="usuario") {
+           $query="SELECT * from usuario where usuario like '%".$_POST["buscador"]."%'";
          } else {
            echo "Por favor selecciona una opcion antes de buscar";
          }
@@ -37,16 +37,16 @@
 
        if ($result = $connection->query($query)) {
 
-           printf("<p>%d autores encontrados.</p>", $result->num_rows);
+           printf("<p>%d usuarios encontrados.</p>", $result->num_rows);
 
        ?>
        <form class="" method="post">
          <input type="text" name="buscador" required>
          <input type="submit" name="" value="Buscar">
-         <button type="button" onclick="window.location.href='adminautor.php'"><span>Mostrar Todos</span></button>
+         <button type="button" onclick="window.location.href='adminuser.php'"><span>Mostrar Todos</span></button>
          <input type="radio" name="opcion" value="nombre"><label> Nombre</label>
-         <input type="radio" name="opcion" value="apellidos"><label> Apellidos</label><br><br>
-         <button type="button" onclick="window.location.href='addautor.php'"><span>Nuevo autor</span></button>
+         <input type="radio" name="opcion" value="usuario"><label> Usuario</label><br><br>
+         <button type="button" onclick="window.location.href='adduser.php'"><span>Nuevo usuario</span></button>
 
        </form><br><br>
 
@@ -54,18 +54,22 @@
       <table style="border:1px solid black">
       <thead>
         <tr>
+          <th>Usuario</th>
           <th>Nombre</th>
-          <th>Apellidos</th>
+          <th>Email</th>
+          <th>Telefono</th>
       </thead>
 
       <?php
 
           while($obj = $result->fetch_object()) {
               echo "<tr>";;
+                echo "<td>".$obj->usuario."</td>";
                 echo "<td>".$obj->nombre."</td>";
-                echo "<td>".$obj->apellidos."</td>";
-                echo "<td>"."<a href='editautor.php?cod=$obj->idautor'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
-                echo "<td>"."<a href='delautor.php?cod=$obj->idautor'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>".$obj->email."</td>";
+                echo "<td>".$obj->telefono."</td>";
+                echo "<td>"."<a href='edituser.php?cod=$obj->idusuario'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='deluser.php?cod=$obj->idusuario'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";
           }
           $result->close();

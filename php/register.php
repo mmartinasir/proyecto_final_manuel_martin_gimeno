@@ -21,6 +21,7 @@
                 <label>Nombre completo  :</label><input type = "text" name = "nombre" class = "box" /><br/><br />
                 <label>Email  :</label><input type = "text" name = "email" class = "box" /><br/><br />
                 <label>Telefono  :</label><input type = "text" name = "phone" class = "box" /><br/><br />
+                <button type="button" name="cancelar" onclick="window.location.href='closesession.php'">Cancelar</button>
                 <input type = "submit" value = " Submit "/><br />
              </form>
 
@@ -78,7 +79,8 @@
       echo "Error en la consulta. Contacte con un administrador.";
       var_dump($consulta);
    } else {
-       echo "Usuario creado con exito.";
+     $_SESSION["usu"]=$_POST["usuario"];
+     header("Location: userpanel.php");
    }
 
  ?>

@@ -16,7 +16,7 @@
       }
      ?>
 
-    <?php if (!isset($_POST["idlibro"])) : ?>
+    <?php if (!isset($_POST["titulo"])) : ?>
 
         <?php
 
@@ -48,14 +48,91 @@
 
       <form method="post">
         <fieldset>
-          <legend>Editar Cliente</legend>
+          <legend>Editar Libro</legend>
           <span>IDlibro</span><input type="text" name="idlibro" value="<?php echo "$obj->idlibro";?>" disabled><br>
           <span>Titulo</span><input type="text" name="titulo" value="<?php echo "$obj->titulo";?>" required><br>
-          <span>Paginas</span><input type="text" name="paginas" value="<?php echo "$obj->paginas";?>" required><br>
+          <span>Paginas</span><input type="number" name="paginas" value="<?php echo "$obj->paginas";?>" required><br>
           <span>Fecha de Publicacion</span><input type="date" name="fecha" value="<?php echo "$obj->fecha_publicacion";?>"required ><br>
-          <span>Editorial</span><input type="text" name="nif" value="<?php echo "$obj->editorial";?>"><br>
-          <span>Autor</span><input type="text" name="codc" value="<?php echo "$obj->autor"; ?>" disabled>
+          <label for="editorial">Editorial</label>
+          <select name="editorial">
+            <?php $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
+            $connection->set_charset("uft8");
+
+            if ($connection->connect_errno) {
+                printf("Connection failed: %s\n", $connection->connect_error);
+                exit();
+            }
+
+
+            $query2="SELECT ideditorial from libros where idlibro ='".$_GET["cod"]."'";
+
+            if ($result = $connection->query($query2)) {
+
+                $result->num_rows;
+
+            $editorial = $result->fetch_object();
+
+            $query="SELECT * from editorial";
+
+            if ($result = $connection->query($query)) {
+
+                $result->num_rows;
+
+                while($obj = $result->fetch_object()) {
+                  if ($obj->ideditorial == $editorial->ideditorial) {
+                    echo "<option value='".$obj->ideditorial."' selected>".$obj->nombre."</option>";
+                  } else {
+                    echo "<option value='".$obj->ideditorial."'>".$obj->nombre."</option>";
+                }
+
+            }
+          }
+          }
+
+
+          ?>
+        </select><br>
+          <label for="autor">Autor</label>
+          <select name="autor">
+            <?php $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
+            $connection->set_charset("uft8");
+
+            if ($connection->connect_errno) {
+                printf("Connection failed: %s\n", $connection->connect_error);
+                exit();
+            }
+
+
+            $query2="SELECT idautor from libros where idlibro ='".$_GET["cod"]."'";
+
+            if ($result = $connection->query($query2)) {
+
+                $result->num_rows;
+
+            $autor = $result->fetch_object();
+
+            $query="SELECT * from autor";
+
+            if ($result = $connection->query($query)) {
+
+                $result->num_rows;
+
+                while($obj = $result->fetch_object()) {
+                  if ($obj->idautor == $autor->idautor) {
+                    echo "<option value='".$obj->idautor."' selected>".$obj->nombre." ".$obj->apellidos."</option>";
+                  } else {
+                    echo "<option value='".$obj->idautor."'>".$obj->nombre." ".$obj->apellidos."</option>";
+                }
+
+            }
+          }
+          }
+
+
+          ?>
+        </select><br>
           <button type="submit" name="button">Editar</button>
+          <button type="button" onclick="window.location.href='adminbook.php'"><span>Cancelar</span></button>
         </fieldset>
 
       </form>
@@ -63,7 +140,7 @@
 
       <?php
 
-    $connection = new mysqli("localhost", "tf", "123456", "tf");
+    $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
     $connection->set_charset("uft8");
 
     if ($connection->connect_errno) {
@@ -71,11 +148,11 @@
         exit();
     }
 
-    $query="UPDATE clientes set dni='".$_POST["nif"]."', apellidos='".$_POST["lastname"]."', nombre='".$_POST["name"]."', Direccion='".$_POST["dir"]."', telefono='".$_POST["tel"]."' where CodCliente =".$_GET["cod"];
+    $query="UPDATE libros set titulo='".$_POST["titulo"]."', paginas='".$_POST["paginas"]."', fecha_publicacion='".$_POST["fecha"]."', ideditorial='".$_POST["editorial"]."', idautor='".$_POST["autor"]."' where idlibro =".$_GET["cod"];
 
     if ($result = $connection->query($query)) {
 
-      header("Location: clientes.php", true, 301);
+      header("Location: adminbook.php", true, 301);
       exit();
   }
   ?>

@@ -19,9 +19,8 @@
 
       <form method="post">
         <fieldset>
-          <legend>Añadir autor</legend>
+          <legend>Añadir Editorial</legend>
           <span>Nombre </span><input type="text" name="name" required><br>
-          <span>Apellidos </span><input type="text" name="surname" required><br>
           <button type="submit" name="button">Añadir</button>
         </fieldset>
 
@@ -38,14 +37,14 @@
         exit();
     }
 
-    $query="INSERT into autor (nombre, apellidos) values ('".$_POST["name"]."','".$_POST["surname"]."')";
+    $query="INSERT into editorial (nombre) values ('".$_POST["name"]."')";
 
     if ($result = $connection->query($query)) {
   ?>
 
   <?php
 
-        header("Location: adminautor.php", true, 301);
+        header("Location: admineditorial.php", true, 301);
         exit();
 }
    ?>

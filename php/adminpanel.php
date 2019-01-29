@@ -24,14 +24,14 @@
               <button class="button" style="vertical-align:middle"><span>Editar Cuenta</span></button>
             </div>
             <div class="">
-              <button class="button" style="vertical-align:middle"><span>Lista de usuarios</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='adminuser.php'"><span>Lista de usuarios</span></button>
             </div>
             <div class="">
               <button class="button" style="vertical-align:middle" onclick="window.location.href='adminbook.php'"><span>Libros</span></button>
 
             </div>
             <div class="">
-              <button class="button" style="vertical-align:middle"><span>Editoriales</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='admineditorial.php'"><span>Editoriales</span></button>
             </div>
             <div class="">
               <button class="button" style="vertical-align:middle" onclick="window.location.href='adminautor.php'"><span>Autores</span></button>

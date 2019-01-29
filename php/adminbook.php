@@ -29,17 +29,14 @@
 
        //MAKING A SELECT QUERY
        /* Consultas de selección que devuelven un conjunto de resultados */
-       $query="SELECT * from libros";
-
+       $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor";
        if (isset($_POST["buscador"])) {
          if ($_POST["opcion"]=="titulo") {
-           $query="SELECT * from libros where titulo like '%".$_POST["buscador"]."%'";
+           $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where titulo like '%".$_POST["buscador"]."%'";
          } elseif ($_POST["opcion"]=="editorial") {
-           $query="SELECT * from libros join editorial on libros.IDeditorial = editorial.IDeditorial
-           where editorial.Nombre like '%".$_POST["buscador"]."%'";
+           $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where editorial.Nombre like '%".$_POST["buscador"]."%'";
          } elseif ($_POST["opcion"]=="autor") {
-           $query="SELECT * from libros join autor on libros.IDautor = autor.IDautor
-           where autor.Nombre like '%".$_POST["buscador"]."%'";
+           $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where autor.Nombre like '%".$_POST["buscador"]."%'";
          }
 
        };
@@ -50,11 +47,13 @@
 
        ?>
        <form class="" method="post">
-         <input type="text" name="buscador" value="Buscar libro" required>
+         <input type="text" name="buscador" required>
          <input type="submit" name="" value="Buscar">
+         <button type="button" onclick="window.location.href='adminbook.php'"><span>Mostrar Todos</span></button>
          <input type="radio" name="opcion" value="titulo"><label> Titulo</label>
          <input type="radio" name="opcion" value="editorial"><label> Editorial</label>
-         <input type="radio" name="opcion" value="autor"><label> Autor</label>
+         <input type="radio" name="opcion" value="autor"><label> Autor</label><br><br>
+         <button type="button" onclick="window.location.href='addbook.php'"><span>Nuevo libro</span></button>
 
        </form><br><br>
 
@@ -65,6 +64,8 @@
           <th>Titulo</th>
           <th>Paginas</th>
           <th>Fecha Publicacion</th>
+          <th>Autor</th>
+          <th>Editorial</th>
       </thead>
 
       <?php
@@ -77,6 +78,8 @@
                 echo "<td>".$obj->titulo."</td>";
                 echo "<td>".$obj->paginas."</td>";
                 echo "<td>".$obj->fecha_publicacion."</td>";
+                echo "<td>".$obj->autornombre." ".$obj->autorapellido."</td>";
+                echo "<td>".$obj->editorialnombre."</td>";
                 echo "<td>"."<a href='editbook.php?cod=$obj->idlibro'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
                 echo "<td>"."<a href='delbook.php?cod=$obj->idlibro'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";

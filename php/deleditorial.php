@@ -25,14 +25,14 @@
        exit();
    }
 
-   $query="DELETE from autor where idautor = '".$_GET["cod"]."'";
+   $query="DELETE from editorial where ideditorial = '".$_GET["cod"]."'";
 
    if ($result = $connection->query($query)) {
  ?>
 
  <?php
 
-       header("Location: adminautor.php", true, 301);
+       header("Location: admineditorial.php", true, 301);
        exit();
 }
   ?>

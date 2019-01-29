@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Administracion de autores</title>
+    <title>Administracion de editoriales</title>
   </head>
   <body>
     <?php
@@ -10,6 +10,7 @@
 
       if (isset($_SESSION["admin"])) {
       } else {
+        session_destroy();
         header("Location: userpanel.php");
       }
      ?>
@@ -24,16 +25,10 @@
            exit();
        }
 
-       $query="SELECT * from autor";
+       $query="SELECT * from editorial";
        if (isset($_POST["buscador"])) {
-         if ($_POST["opcion"]=="nombre") {
-           $query="SELECT * from autor where nombre like '%".$_POST["buscador"]."%'";
-         } elseif ($_POST["opcion"]=="apellidos") {
-           $query="SELECT * from autor where apellidos like '%".$_POST["buscador"]."%'";
-         } else {
-           echo "Por favor selecciona una opcion antes de buscar";
-         }
-       };
+           $query="SELECT * from editorial where nombre like '%".$_POST["buscador"]."%'";
+         };
 
        if ($result = $connection->query($query)) {
 
@@ -43,10 +38,8 @@
        <form class="" method="post">
          <input type="text" name="buscador" required>
          <input type="submit" name="" value="Buscar">
-         <button type="button" onclick="window.location.href='adminautor.php'"><span>Mostrar Todos</span></button>
-         <input type="radio" name="opcion" value="nombre"><label> Nombre</label>
-         <input type="radio" name="opcion" value="apellidos"><label> Apellidos</label><br><br>
-         <button type="button" onclick="window.location.href='addautor.php'"><span>Nuevo autor</span></button>
+         <button type="button" onclick="window.location.href='admineditorial.php'"><span>Mostrar Todos</span></button><br><br>
+         <button type="button" onclick="window.location.href='addeditorial.php'"><span>Nueva Editorial</span></button>
 
        </form><br><br>
 
@@ -55,7 +48,6 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Apellidos</th>
       </thead>
 
       <?php
@@ -63,9 +55,8 @@
           while($obj = $result->fetch_object()) {
               echo "<tr>";;
                 echo "<td>".$obj->nombre."</td>";
-                echo "<td>".$obj->apellidos."</td>";
-                echo "<td>"."<a href='editautor.php?cod=$obj->idautor'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
-                echo "<td>"."<a href='delautor.php?cod=$obj->idautor'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='editeditorial.php?cod=$obj->ideditorial'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='deleditorial.php?cod=$obj->ideditorial'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";
           }
           $result->close();

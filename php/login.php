@@ -10,6 +10,13 @@
     <link rel="stylesheet" type="text/css" href=" ">
   </head>
   <body>
+    <?php
+      if (isset($_SESSION["admin"])) {
+        header("Location: adminpanel.php");
+      } elseif (isset($_SESSION["usu"])) {
+        header("Location: userpanel.php");
+      };
+     ?>
 
     <?php
         //FORM SUBMITTED
@@ -46,8 +53,8 @@
                   $_SESSION["admin"]=$_POST["user"];
                   header("Location: adminpanel.php");
                 } else {
-                  header("Location: userpanel.php");
                   $_SESSION["usu"]=$_POST["user"];
+                  header("Location: userpanel.php");
                 }
               }
           } else {
@@ -62,8 +69,9 @@
           <div style = "margin:30px">
 
              <form action = "" method = "post">
-                <label>UserName  :</label><input type = "text" name = "user" class = "box"/><br /><br />
-                <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+                <label>Usuario  :</label><input type = "text" name = "user" class = "box"/><br /><br />
+                <label>Contraseña  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+                <label><a href="register.php">Registro</a></label><br />
                 <input type = "submit" value = " Submit "/><br />
              </form>
 
