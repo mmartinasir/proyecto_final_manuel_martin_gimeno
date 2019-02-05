@@ -8,9 +8,8 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["admin"])) {
-      } else {
-        header("Location: userpanel.php");
+      if (!isset($_SESSION["admin"])) {
+        header("Location: login.php");
       }
      ?>
 
@@ -25,13 +24,11 @@
        }
 
        $query="SELECT * from usuarios where rol = 'cliente'";;
-       if (isset($_POST["buscador"])) {
+       if (isset($_POST["buscador"]) && isset($_POST['opcion'])) {
          if ($_POST["opcion"]=="nombre") {
            $query="SELECT * from usuario where nombre like '%".$_POST["buscador"]."%'";
          } elseif ($_POST["opcion"]=="usuario") {
            $query="SELECT * from usuario where usuario like '%".$_POST["buscador"]."%'";
-         } else {
-           echo "Por favor selecciona una opcion antes de buscar";
          }
        };
 

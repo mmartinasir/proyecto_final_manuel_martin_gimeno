@@ -11,7 +11,7 @@
       if (isset($_SESSION["admin"])) {
         echo "Bienvenido, ".$_SESSION["admin"];
       } else {
-        header("Location: userpanel.php");
+        header("Location: login.php");
       }
      ?>
     <div align = "center">

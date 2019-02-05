@@ -9,9 +9,8 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["admin"])) {
-      } else {
-        header("Location: userpanel.php");
+      if (!isset($_SESSION["admin"])) {
+        header("Location: login.php");
       }
      ?>
 
@@ -38,6 +37,7 @@
         exit();
     }
 
+    $repetido = "SELECT * from autor where nombre"
     $query="INSERT into autor (nombre, apellidos) values ('".$_POST["name"]."','".$_POST["surname"]."')";
 
     if ($result = $connection->query($query)) {

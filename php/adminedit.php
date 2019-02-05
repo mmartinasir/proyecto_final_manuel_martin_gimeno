@@ -14,7 +14,7 @@
       }
      ?>
 
-    <?php if (!isset($_POST["name"])) : ?>
+    <?php if (!isset($_POST["nombre"])) : ?>
 
         <?php
 
@@ -26,7 +26,7 @@
           exit();
       }
 
-      $query="SELECT * from editorial where ideditorial =".$_GET["cod"];
+      $query="SELECT * from usuarios where idusuario =".$_GET["cod"];
 
       if ($result = $connection->query($query)) {
 
@@ -37,7 +37,7 @@
       }
 
       if ($result->num_rows==0) {
-        echo "Error: La editorial que se intenta editar no existe";
+        echo "Error: El usuario que se intenta editar no existe";
         exit();
       }
 
@@ -46,9 +46,12 @@
 
       <form method="post">
         <fieldset>
-          <legend>Editar Autor</legend>
-          <span>IDeditorial</span><input type="text" name="idautor" value="<?php echo "$obj->ideditorial";?>" disabled><br>
-          <span>Nombre</span><input type="text" name="name" value="<?php echo "$obj->nombre";?>" required><br>
+          <legend>Editar Usuario</legend>
+          <span>Usuario </span><input type="text" name="usuario" value="<?php echo "$obj->usuario";?>" required><br>
+          <span>Nombre </span><input type="text" name="nombre" value="<?php echo "$obj->nombre";?>" required><br>
+          <span>Email </span><input type="text" name="email" value="<?php echo "$obj->email";?>" required><br>
+          <span>Telefono </span><input type="text" name="telefono" value="<?php echo "$obj->telefono";?>" required><br>
+          <span>Contraseña </span><input type="password" name="password" required><br>
           <button type="submit" name="button">Editar</button>
         </fieldset>
 
@@ -65,10 +68,11 @@
         exit();
     }
 
-    $query="UPDATE editorial set nombre='".$_POST["name"]."' where ideditorial = '".$_GET["cod"]."'";
+    $pass=md5($_POST['password']);
+    $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', password='".$pass."', where idusuario = '".$_GET["cod"]."'";
 
     if ($result = $connection->query($query)) {
-      header("Location: admineditorial.php", true, 301);
+      header("Location: adminuser.php", true, 301);
       exit();
   }
   ?>

@@ -8,10 +8,8 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["admin"])) {
-      } else {
-        session_destroy();
-        header("Location: userpanel.php");
+      if (!isset($_SESSION["admin"])) {
+        header("Location: login.php");
       }
      ?>
 
@@ -26,7 +24,7 @@
        }
 
        $query="SELECT * from editorial";
-       if (isset($_POST["buscador"])) {
+       if (isset($_POST["buscador"]) && isset($_POST['opcion'])) {
            $query="SELECT * from editorial where nombre like '%".$_POST["buscador"]."%'";
          };
 

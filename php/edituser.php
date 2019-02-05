@@ -9,9 +9,12 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["admin"])) {
-      } else {
-        header("Location: userpanel.php");
+      if (!isset($_SESSION["admin"])) {
+        header("Location: login.php");
+      }
+
+      if (!isset($_GET["cod"])) {
+        header("Location: adminuser.php");
       }
      ?>
 
@@ -37,6 +40,11 @@
 
       }
 
+      if ($obj->rol == "admin") {
+        header("Location: adminuser.php");
+        exit();
+      }
+
       if ($result->num_rows==0) {
         echo "Error: El usuario que se intenta editar no existe";
         exit();
@@ -53,9 +61,9 @@
           <span>Nombre </span><input type="text" name="nombre" value="<?php echo "$obj->nombre";?>" required><br>
           <span>Email </span><input type="text" name="email" value="<?php echo "$obj->email";?>" required><br>
           <span>Telefono </span><input type="text" name="telefono" value="<?php echo "$obj->telefono";?>" required><br>
-          <span>Contraseña </span><input type="text" name="password" required><br>
-          <span>Rol </span><input type="text" name="rol" value="<?php echo "$obj->rol";?>" required><br>
+          <span>Contraseña </span><input type="text" name="password" value="<?php echo "$obj->password";?>" required><br>
           <button type="submit" name="button">Editar</button>
+          <button type="button" onclick="window.location.href='edituser.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -72,10 +80,52 @@
     }
 
     $pass=md5($_POST['password']);
-    $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', '".$pass."', rol='".$_POST["rol"]."' where idusuario = '".$_GET["cod"]."'";
+    $buscarusuario = "SELECT * from usuarios where Usuario = '".$_POST["usuario"]."'";
+    $buscarusuario2 = "SELECT usuario from usuarios where idusuario = '".$_GET["cod"]."'";
+    $buscaremail = "SELECT * from usuarios where email = '".$_POST["email"]."'";
+    $buscaremail2 = "SELECT email from usuarios where idusuario = '".$_GET["cod"]."'";
+    $buscarpass = "SELECT password from usuarios where idusuario = '".$_GET["cod"]."'";
+    $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', password='".$pass."' where idusuario = '".$_GET["cod"]."'";
+    $query2="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."' where idusuario = '".$_GET["cod"]."'";
+    if ($result = $connection->query($buscarusuario)) {
+      $result->num_rows;
+  }
+    if ($result->num_rows > 0) {
+      if ($result = $connection->query($buscarusuario2)) {
+        $obj = $result->fetch_object();
+        if ($obj->usuario != $_POST["usuario"]) {
+          echo "Error: El usuario ya existe<br>";
+          echo "<button onclick='history.go(-1);'>Volver</button>";
+          echo $detectar;
+          exit();
+        }
+      }
+    }
+
+    if ($result = $connection->query($buscaremail)) {
+      $result->num_rows;
+  }
+    if ($result->num_rows > 0) {
+      if ($result = $connection->query($buscaremail2)) {
+        $obj = $result->fetch_object();
+        if ($obj->email != $_POST["email"]) {
+          echo "Error: El email esta siendo utilizado por otro usuario<br>";
+          echo "<button onclick='history.go(-1);'>Volver</button>";
+          exit();
+        }
+      }
+    }
+
+    if ($result = $connection->query($buscarpass)) {
+      $obj = $result->fetch_object();
+  }
+
+  if ($obj->password == $_POST["password"]) {
+    $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."' where idusuario = '".$_GET["cod"]."'";
+  }
 
     if ($result = $connection->query($query)) {
-      header("Location: adminautor.php", true, 301);
+      header("Location: adminuser.php", true, 301);
       exit();
   }
   ?>

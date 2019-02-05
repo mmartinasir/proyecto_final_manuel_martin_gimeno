@@ -50,7 +50,8 @@
         if ($result->num_rows===0) {
 
         } else {
-          echo "El usuario ya está registrado";
+          echo "El usuario ya está registrado<br>";
+          echo "<a href='register.php'>Volver al registro</a>";
           exit();
         }
 
@@ -62,7 +63,8 @@
         if ($result->num_rows===0) {
 
         } else {
-          echo "El email ya está siendo utilizado por otro usuario.";
+          echo "El email ya está siendo utilizado por otro usuario.<br>";
+          echo "<a href='register.php'>Volver al registro</a>";
           exit();
         }
 

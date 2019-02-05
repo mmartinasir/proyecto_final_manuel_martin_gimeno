@@ -9,9 +9,8 @@
     <?php
       session_start();
 
-      if (isset($_SESSION["admin"])) {
-      } else {
-        header("Location: userpanel.php");
+      if (!isset($_SESSION["admin"])) {
+        header("Location: login.php");
       }
      ?>
 
@@ -37,16 +36,24 @@
         exit();
     }
 
+    $repetido = "SELECT * from editorial where nombre = '".$_POST["name"]."'";
     $query="INSERT into editorial (nombre) values ('".$_POST["name"]."')";
 
-    if ($result = $connection->query($query)) {
-  ?>
+    if ($result = $connection->query($repetido)) {
+      $result->num_rows;
+    }
+    if ($result->num_rows > 0) {
+      echo "Error: la editorial ya existe";
+      echo "<br>";
+      echo "<a href='addeditorial.php'>Volver</a>";
+      exit();
+    }
 
-  <?php
+    if ($result = $connection->query($query)) {
 
         header("Location: admineditorial.php", true, 301);
         exit();
-}
+    }
    ?>
 
     <?php endif ?>
