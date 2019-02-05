@@ -26,9 +26,9 @@
        $query="SELECT * from usuarios where rol = 'cliente'";;
        if (isset($_POST["buscador"]) && isset($_POST['opcion'])) {
          if ($_POST["opcion"]=="nombre") {
-           $query="SELECT * from usuario where nombre like '%".$_POST["buscador"]."%'";
+           $query="SELECT * from usuarios where nombre like '%".$_POST["buscador"]."%'";
          } elseif ($_POST["opcion"]=="usuario") {
-           $query="SELECT * from usuario where usuario like '%".$_POST["buscador"]."%'";
+           $query="SELECT * from usuarios where usuario like '%".$_POST["buscador"]."%'";
          }
        };
 

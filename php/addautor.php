@@ -22,6 +22,7 @@
           <span>Nombre </span><input type="text" name="name" required><br>
           <span>Apellidos </span><input type="text" name="surname" required><br>
           <button type="submit" name="button">Añadir</button>
+          <button type="button" onclick="window.location.href='adminautor.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -36,14 +37,36 @@
         printf("Connection failed: %s\n", $connection->connect_error);
         exit();
     }
-
-    $repetido = "SELECT * from autor where nombre"
     $query="INSERT into autor (nombre, apellidos) values ('".$_POST["name"]."','".$_POST["surname"]."')";
+    $buscarnombre = "SELECT * from autor where nombre = '".$_POST["name"]."'";
+    $buscarapellido = "SELECT * from autor where apellidos = '".$_POST["surname"]."'";
 
-    if ($result = $connection->query($query)) {
-  ?>
+  if ($result = $connection->query($buscarnombre)) {
+    $result->num_rows;
+    if ($result->num_rows > 0) {
+      $no = 1;
+    } else {
+      $no = 0;
+    }
+  }
 
-  <?php
+  if ($result = $connection->query($buscarapellido)) {
+    $result->num_rows;
+    if ($result->num_rows > 0) {
+      $no2 = 1;
+    } else {
+      $no2 = 0;
+    }
+  }
+  
+  if ($no == 1 && $no2 == 1) {
+    echo "Error: Ya existe ese autor en la base de datos<br>";
+    echo "<button onclick='history.go(-1);'>Volver</button>";
+    exit();
+  }
+
+
+  if ($result = $connection->query($query)) {
 
         header("Location: adminautor.php", true, 301);
         exit();

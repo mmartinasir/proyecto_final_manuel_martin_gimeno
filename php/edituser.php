@@ -59,9 +59,9 @@
           <span>IDusuario</span><input type="text" name="idusuario" value="<?php echo "$obj->idusuario";?>" disabled><br>
           <span>Usuario </span><input type="text" name="usuario" value="<?php echo "$obj->usuario";?>" required><br>
           <span>Nombre </span><input type="text" name="nombre" value="<?php echo "$obj->nombre";?>" required><br>
-          <span>Email </span><input type="text" name="email" value="<?php echo "$obj->email";?>" required><br>
+          <span>Email </span><input type="email" name="email" value="<?php echo "$obj->email";?>" required><br>
           <span>Telefono </span><input type="text" name="telefono" value="<?php echo "$obj->telefono";?>" required><br>
-          <span>Contraseña </span><input type="text" name="password" value="<?php echo "$obj->password";?>" required><br>
+          <span>Contraseña </span><input type="text" name="password"><br>
           <button type="submit" name="button">Editar</button>
           <button type="button" onclick="window.location.href='edituser.php'">Cancelar</button>
         </fieldset>
@@ -96,7 +96,6 @@
         if ($obj->usuario != $_POST["usuario"]) {
           echo "Error: El usuario ya existe<br>";
           echo "<button onclick='history.go(-1);'>Volver</button>";
-          echo $detectar;
           exit();
         }
       }
@@ -116,11 +115,7 @@
       }
     }
 
-    if ($result = $connection->query($buscarpass)) {
-      $obj = $result->fetch_object();
-  }
-
-  if ($obj->password == $_POST["password"]) {
+  if (empty($_POST["password"])) {
     $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."' where idusuario = '".$_GET["cod"]."'";
   }
 
