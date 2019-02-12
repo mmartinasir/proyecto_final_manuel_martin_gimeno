@@ -44,22 +44,20 @@
   if ($result = $connection->query($buscarnombre)) {
     $result->num_rows;
     if ($result->num_rows > 0) {
-      $no = 1;
-    } else {
-      $no = 0;
+      $obj = $result->fetch_object();
+      $no1 = $obj->idautor;
     }
   }
 
   if ($result = $connection->query($buscarapellido)) {
     $result->num_rows;
     if ($result->num_rows > 0) {
-      $no2 = 1;
-    } else {
-      $no2 = 0;
+      $obj = $result->fetch_object();
+      $no2 = $obj->idautor;
     }
   }
   
-  if ($no == 1 && $no2 == 1) {
+  if ($no1 == $no2) {
     echo "Error: Ya existe ese autor en la base de datos<br>";
     echo "<button onclick='history.go(-1);'>Volver</button>";
     exit();
