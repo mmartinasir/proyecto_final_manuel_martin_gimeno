@@ -37,7 +37,8 @@
       }
 
       if ($result->num_rows==0) {
-        echo "Error: El libro que se intenta editar no existe";
+        echo "Error: El libro que se intenta editar no existe<br>";
+        echo "<button onclick='history.go(-1);'>Volver</button>";
         exit();
       }
 
@@ -130,7 +131,7 @@
           ?>
         </select><br>
           <button type="submit" name="button">Editar</button>
-          <button type="button" onclick="window.location.href='adminbook.php'"><span>Cancelar</span></button>
+          <button type="button" onclick="window.location.href='adminbook.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -147,7 +148,16 @@
     }
 
     $query="UPDATE libros set titulo='".$_POST["titulo"]."', paginas='".$_POST["paginas"]."', fecha_publicacion='".$_POST["fecha"]."', ideditorial='".$_POST["editorial"]."', idautor='".$_POST["autor"]."' where idlibro =".$_GET["cod"];
-
+    $buscartitulo = "SELECT * from libros where titulo ='".$_POST["titulo"]."'";
+    
+    if ($result = $connection->query($buscartitulo)) {
+      $result->num_rows;
+      if ($result->num_rows > 0) {
+        echo "Error: Ese libro ya existe en la base de datos<br>";
+        echo "<button onclick='history.go(-1);'>Volver</button>";
+        exit();
+      }
+  }
     if ($result = $connection->query($query)) {
 
       header("Location: adminbook.php", true, 301);

@@ -21,6 +21,7 @@
           <legend>Añadir Editorial</legend>
           <span>Nombre </span><input type="text" name="name" required><br>
           <button type="submit" name="button">Añadir</button>
+          <button type="button" onclick="window.location.href='admineditorial.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -43,9 +44,8 @@
       $result->num_rows;
     }
     if ($result->num_rows > 0) {
-      echo "Error: la editorial ya existe";
-      echo "<br>";
-      echo "<a href='addeditorial.php'>Volver</a>";
+      echo "Error: la editorial ya existe en la base de datos<br>";
+      echo "<button onclick='history.go(-1);'>Volver</button>";
       exit();
     }
 

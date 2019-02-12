@@ -22,11 +22,11 @@
           <legend>Añadir usuario</legend>
           <span>Usuario </span><input type="text" name="usuario" required><br>
           <span>Nombre </span><input type="text" name="nombre" required><br>
-          <span>Email </span><input type="text" name="email" required><br>
+          <span>Email </span><input type="email" name="email" required><br>
           <span>Telefono </span><input type="number" name="telefono" required><br>
           <span>Contraseña </span><input type="password" name="password" required><br>
           <button type="submit" name="button">Añadir</button>
-          <button type="button" onclick="window.location.href='edituser.php'">Cancelar</button>
+          <button type="button" onclick="window.location.href='adminuser.php'">Cancelar</button>
         </fieldset>
 
       </form>

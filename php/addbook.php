@@ -40,7 +40,6 @@
                 $result->num_rows;
 
             $editorial = $result->fetch_object();
-
             $query="SELECT * from editorial";
 
             if ($result = $connection->query($query)) {
@@ -116,12 +115,18 @@
     }
 
     $query="INSERT into libros (titulo, paginas, fecha_publicacion, ideditorial, idautor) values ('".$_POST["titulo"]."','".$_POST["paginas"]."','".$_POST["fecha"]."','".$_POST["editorial"]."','".$_POST["autor"]."')";
+    $buscartitulo = "SELECT * from libros where titulo ='".$_POST["titulo"]."'";
+
+    if ($result = $connection->query($buscartitulo)) {
+      $result->num_rows;
+      if ($result->num_rows > 0) {
+        echo "Error: El libro ya existe en la base de datos.<br>";
+        echo "<button onclick='history.go(-1);'>Volver</button>";
+        exit();
+      }
+}
 
     if ($result = $connection->query($query)) {
-  ?>
-
-  <?php
-
         header("Location: adminbook.php", true, 301);
         exit();
 }

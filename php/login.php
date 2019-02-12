@@ -43,7 +43,7 @@
           if ($result = $connection->query($consulta)) {
               //No rows returned
               if ($result->num_rows===0) {
-                echo "LOGIN INVALIDO";
+                $incorrecto = "Usuario o contraseña incorrectos";
               } else {
                 //VALID LOGIN. SETTING SESSION VARS
                 $usuario = $result->fetch_object();
@@ -51,9 +51,11 @@
 
                 if ($usuario->rol == "admin") {
                   $_SESSION["admin"]=$_POST["user"];
+                  $_SESSION["id"]=$usuario->idusuario;
                   header("Location: adminpanel.php");
                 } else {
                   $_SESSION["usu"]=$_POST["user"];
+                  $_SESSION["id"]=$usuario->idusuario;
                   header("Location: userpanel.php");
                 }
               }
@@ -71,6 +73,11 @@
              <form action = "" method = "post">
                 <label>Usuario  :</label><input type = "text" name = "user" class = "box"/><br /><br />
                 <label>Contraseña  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+                <?php 
+                if (!empty($incorrecto)) {
+                  echo "<label><font color='red'>$incorrecto</font></label><br/><br />";
+                }
+                ?>
                 <label><a href="register.php">Registro</a></label><br />
                 <input type = "submit" value = " Submit "/><br />
              </form>

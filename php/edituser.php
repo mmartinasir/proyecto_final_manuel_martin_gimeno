@@ -63,7 +63,7 @@
           <span>Telefono </span><input type="text" name="telefono" value="<?php echo "$obj->telefono";?>" required><br>
           <span>Contraseña </span><input type="text" name="password"><br>
           <button type="submit" name="button">Editar</button>
-          <button type="button" onclick="window.location.href='edituser.php'">Cancelar</button>
+          <button type="button" onclick="window.location.href='adminuser.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -87,6 +87,7 @@
     $buscarpass = "SELECT password from usuarios where idusuario = '".$_GET["cod"]."'";
     $query="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', password='".$pass."' where idusuario = '".$_GET["cod"]."'";
     $query2="UPDATE usuarios set usuario='".$_POST["usuario"]."', nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."' where idusuario = '".$_GET["cod"]."'";
+    
     if ($result = $connection->query($buscarusuario)) {
       $result->num_rows;
   }

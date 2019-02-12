@@ -21,7 +21,7 @@
           <div style = "margin:30px">
 
             <div>
-              <button class="button" style="vertical-align:middle"><span>Editar Cuenta</span></button>
+              <button class="button" style="vertical-align:middle" onclick="window.location.href='useredit.php?cod=<?php echo $_SESSION['id']?>'"><span>Editar Cuenta</span></button>
             </div>
             <div class="">
               <button class="button" style="vertical-align:middle" onclick="window.location.href='adminuser.php'"><span>Lista de usuarios</span></button>

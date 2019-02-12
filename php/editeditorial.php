@@ -37,7 +37,8 @@
       }
 
       if ($result->num_rows==0) {
-        echo "Error: La editorial que se intenta editar no existe";
+        echo "Error: La editorial que se intenta editar no existe<br>";
+        echo "<button onclick='history.go(-1);'>Volver</button>";
         exit();
       }
 
@@ -50,6 +51,7 @@
           <span>IDeditorial</span><input type="text" name="idautor" value="<?php echo "$obj->ideditorial";?>" disabled><br>
           <span>Nombre</span><input type="text" name="name" value="<?php echo "$obj->nombre";?>" required><br>
           <button type="submit" name="button">Editar</button>
+          <button type="button" onclick="window.location.href='admineditorial.php'">Cancelar</button>
         </fieldset>
 
       </form>
@@ -66,7 +68,16 @@
     }
 
     $query="UPDATE editorial set nombre='".$_POST["name"]."' where ideditorial = '".$_GET["cod"]."'";
+    $buscarnombre = "SELECT * from editorial where nombre ='".$_POST["name"]."'";
 
+    if ($result = $connection->query($buscarnombre)) {
+      $result->num_rows;
+      if ($result->num_rows > 0) {
+        echo "Error: La editorial ya existe en la base de datos<br>";
+        echo "<button onclick='history.go(-1);'>Volver</button>";
+        exit();
+      }
+  }
     if ($result = $connection->query($query)) {
       header("Location: admineditorial.php", true, 301);
       exit();
