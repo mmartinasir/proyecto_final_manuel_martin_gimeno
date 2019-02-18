@@ -3,27 +3,46 @@
   <head>
     <meta charset="utf-8">
     <title>Registro</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
   </head>
   <body>
 
     <?php
   if (!isset($_POST["user"])) : ?>
 
-    <div align = "center">
-       <div style = "width:300px; border: solid 1px #333333; " align = "left">
-          <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Registro</b></div>
+  <form action = "" method = "post">
+  <div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Registro</h1>
+			</div>
 
-          <div style = "margin:30px">
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="Usuario" id="login-name" name="user">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
 
-             <form action = "" method = "post">
-                <label>Usuario  :</label><input type = "text" name = "user" class = "box"/><br /><br />
-                <label>Contraseña  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                <label>Nombre completo  :</label><input type = "text" name = "nombre" class = "box" /><br/><br />
-                <label>Email  :</label><input type = "text" name = "email" class = "box" /><br/><br />
-                <label>Telefono  :</label><input type = "text" name = "phone" class = "box" /><br/><br />
-                <button type="button" name="cancelar" onclick="window.location.href='closesession.php'">Cancelar</button>
-                <input type = "submit" value = " Submit "/><br />
-             </form>
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="Contraseña" id="login-pass" name="password">
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+        </div>
+        <div class="control-group">
+        <input type="text" class="login-field" placeholder="Nombre Completo" name="nombre">
+        </div>
+        <div class="control-group">
+        <input type="email" class="login-field" placeholder="Email" name="email">
+        </div>
+        <div class="control-group">
+        <input type="number" class="login-field" placeholder="Telefono" name="phone">
+        </div>
+
+				<input type="submit" class="btn btn-primary btn-large btn-block" value="Login">
+				<a class="login-link" href="closesession.php">Cancelar</a>
+			</div>
+		</div>
+  </div>
+  </form>
 
           </div>
 

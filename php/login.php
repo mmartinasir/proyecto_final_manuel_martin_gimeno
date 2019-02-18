@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
+    <link rel="stylesheet" type="text/css" href="login.css">
   </head>
   <body>
     <?php
@@ -64,29 +64,31 @@
           }
       }
     ?>
-    <div align = "center">
-       <div style = "width:300px; border: solid 1px #333333; " align = "left">
-          <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+    <body>
+  <form action = "" method = "post">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
 
-          <div style = "margin:30px">
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="Usuario" id="login-name" name="user">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
 
-             <form action = "" method = "post">
-                <label>Usuario  :</label><input type = "text" name = "user" class = "box"/><br /><br />
-                <label>Contraseña  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                <?php 
-                if (!empty($incorrecto)) {
-                  echo "<label><font color='red'>$incorrecto</font></label><br/><br />";
-                }
-                ?>
-                <label><a href="register.php">Registro</a></label><br />
-                <input type = "submit" value = " Submit "/><br />
-             </form>
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="Contraseña" id="login-pass" name="password">
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
 
-          </div>
-
-       </div>
-
-    </div>
-
+				<input type="submit" class="btn btn-primary btn-large btn-block" value="Login">
+				<a class="login-link" href="register.php">Registro</a>
+			</div>
+		</div>
+  </div>
+    </form>
+</body>
   </body>
 </html>
