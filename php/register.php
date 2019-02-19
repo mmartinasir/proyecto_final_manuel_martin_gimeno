@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="login.css">
   </head>
   <body>
-
+  <?php session_start(); ?>
     <?php
   if (!isset($_POST["user"])) : ?>
 
@@ -20,7 +20,7 @@
 			<div class="login-form">
 				<div class="control-group">
 				<input type="text" class="login-field" value="" placeholder="Usuario" id="login-name" name="user">
-				<label class="login-field-icon fui-user" for="login-name"></label>
+				<label class="login-field-icon fui-user" for="login-name"><?php if (isset($_SESSION["usurepe"])) {echo "<font color='red'>El usuario ya esta registrado</font>"; unset($_SESSION["usurepe"]);} ?></label>
 				</div>
 
 				<div class="control-group">
@@ -32,12 +32,14 @@
         </div>
         <div class="control-group">
         <input type="email" class="login-field" placeholder="Email" name="email">
+        <label class="login-field-icon fui-user" for="login-name"><?php if (isset($_SESSION["emailrepe"])) {echo "<font color='red'>El email ya esta registrado</font>"; unset($_SESSION["emailrepe"]);} ?></label>
+
         </div>
         <div class="control-group">
         <input type="number" class="login-field" placeholder="Telefono" name="phone">
         </div>
 
-				<input type="submit" class="btn btn-primary btn-large btn-block" value="Login">
+				<input type="submit" class="btn btn-primary btn-large btn-block" value="Registro">
 				<a class="login-link" href="closesession.php">Cancelar</a>
 			</div>
 		</div>
@@ -64,13 +66,9 @@
     $buscaremail = "select * from usuarios where Email = '".$_POST['email']."'";
 
     if ($result = $connection->query($buscarusuario)) {
-
-        //No rows returned
-        if ($result->num_rows===0) {
-
-        } else {
-          echo "El usuario ya está registrado<br>";
-          echo "<a href='register.php'>Volver al registro</a>";
+        if ($result->num_rows > 0) {
+          $_SESSION["usurepe"] = true;
+          header("Location: register.php");
           exit();
         }
 
@@ -79,11 +77,9 @@
     if ($result = $connection->query($buscaremail)) {
 
         //No rows returned
-        if ($result->num_rows===0) {
-
-        } else {
-          echo "El email ya está siendo utilizado por otro usuario.<br>";
-          echo "<a href='register.php'>Volver al registro</a>";
+        if ($result->num_rows > 0) {
+          $_SESSION["emailrepe"] = true;
+          header("Location: register.php");
           exit();
         }
 

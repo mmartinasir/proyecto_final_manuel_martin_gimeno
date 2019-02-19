@@ -80,7 +80,7 @@
 
 				<div class="control-group">
 				<input type="password" class="login-field" value="" placeholder="Contraseña" id="login-pass" name="password">
-				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				<label class="login-field-icon fui-lock" for="login-pass"><font color="red"><?php if (!empty($incorrecto)){echo $incorrecto;};?></font></label>
 				</div>
 
 				<input type="submit" class="btn btn-primary btn-large btn-block" value="Login">
