@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="panel.css">
   </head>
   <body>
 
@@ -53,8 +54,36 @@
 
     ?>
 
-      <form method="post">
-        <fieldset>
+<header>
+		<div class="logo">Libre<span>ria</span></div>
+	</header>
+	<div class="nav-btn">Menu</div>
+	<div class="container">
+		
+		<div class="sidebar">
+			<nav>
+				<a href="#">Libreria</a>
+				<ul>
+					<li><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li class="active"><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li><a href="adminautor.php">Autores</a></li>
+					<li><a href="closesession.php">Cerrar sesion</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="main-content">
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
+			<div class="panel-wrapper">
+				<div class="panel-head">
+					News
+				</div>
+				<div class="panel-body">
+        <form method="post">
           <legend>Editar Cuenta</legend>
           <span>Nombre </span><input type="text" name="nombre" value="<?php echo "$obj->nombre";?>" required><br>
           <span>Email </span><input type="text" name="email" value="<?php echo "$obj->email";?>" required><br>
@@ -62,10 +91,11 @@
           <span>Contraseña </span><input type="password" name="password" required><br>
           <button type="submit" name="button">Editar</button>
           <button type="button" onclick="window.location.href='login.php'">Cancelar</button>
-
-        </fieldset>
-
       </form>
+				</div>
+			</div>
+		</div>
+	</div>
     <?php else : ?>
 
       <?php
@@ -79,7 +109,9 @@
     }
 
     $pass=md5($_POST['password']);
-    $query="UPDATE usuarios set nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', password='".$pass."', where idusuario = '".$_GET["cod"]."'";
+    $buscaremail = "SELECT * from usuarios where email = '".$_POST["email"]."'";
+    $buscaremail2 = "SELECT email from usuarios where idusuario = '".$_GET["cod"]."'";
+    $query="UPDATE usuarios set nombre='".$_POST["nombre"]."', email='".$_POST["email"]."', telefono='".$_POST["telefono"]."', password='".$pass."' where idusuario = '".$_GET["cod"]."'";
 
     if ($result = $connection->query($buscaremail)) {
       $result->num_rows;
@@ -101,6 +133,9 @@
       header("Location: login.php", true, 301);
       exit();
   }
+  echo "$buscaremail<br>";
+  echo "$buscaremail2<br>";
+  echo "$query<br>"
   ?>
 
     <?php endif ?>
