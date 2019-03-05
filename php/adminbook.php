@@ -93,6 +93,8 @@
           <th>Fecha Publicacion</th>
           <th>Autor</th>
           <th>Editorial</th>
+          <th>Editar</th>
+          <th>Borrar</th>
       </thead>
 				</div>
 			</div>

@@ -86,6 +86,9 @@
           <th>Nombre</th>
           <th>Email</th>
           <th>Telefono</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+          <th>Pedidos</th>
       </thead>
 				</div>
 			</div>
@@ -101,6 +104,7 @@
                 echo "<td>".$obj->telefono."</td>";
                 echo "<td>"."<a href='edituser.php?cod=$obj->idusuario'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
                 echo "<td>"."<a href='deluser.php?cod=$obj->idusuario'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='adminpedidos.php?cod=$obj->idusuario'>"."<img src='../img/zoom.png' style='width:40px;height:40px'>"."</td>";
               echo "</tr>";
           }
           $result->close();

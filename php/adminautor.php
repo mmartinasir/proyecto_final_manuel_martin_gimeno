@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Administracion de autores</title>
+    <link rel="stylesheet" href="panel.css">
   </head>
   <body>
     <?php
@@ -37,6 +38,33 @@
            printf("<p>%d autores encontrados.</p>", $result->num_rows);
 
        ?>
+       	</header>
+	<div class="nav-btn">Menu</div>
+	<div class="container">
+		
+		<div class="sidebar">
+			<nav>
+				<a href="#">Libreria</a>
+				<ul>
+					<li><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li class="active"><a href="adminautor.php">Autores</a></li>
+					<li><a href="closesession.php">Cerrar sesion</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="main-content">
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
+			<div class="panel-wrapper">
+				<div class="panel-head">
+					News
+				</div>
+				<div class="panel-body">
        <form class="" method="post">
          <input type="text" name="buscador" required>
          <input type="submit" name="" value="Buscar">
@@ -44,16 +72,19 @@
          <input type="radio" name="opcion" value="nombre"><label> Nombre</label>
          <input type="radio" name="opcion" value="apellidos"><label> Apellidos</label><br><br>
          <button type="button" onclick="window.location.href='addautor.php'"><span>Nuevo autor</span></button>
-
        </form><br><br>
-
-
       <table style="border:1px solid black">
       <thead>
         <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
+          <th>Editar</th>
+          <th>Borrar</th>
       </thead>
+       </div>
+       </div>
+       </div>
+       </div>
 
       <?php
 

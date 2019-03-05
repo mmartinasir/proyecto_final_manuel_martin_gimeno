@@ -25,7 +25,7 @@
 				<ul>
 					<li class="active"><a href="adminpanel.php">Panel de Administrador</a></li>
 					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
-					<li><a href="#">Mis pedidos</a></li>
+					<li><a href="pedidos.php">Mis pedidos</a></li>
 					<li><a href="listbook.php">Libros disponibles</a></li>
 					<li><a href="closesession.php">Cerrar sesion</a></li>
 				</ul>

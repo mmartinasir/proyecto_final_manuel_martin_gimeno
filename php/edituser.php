@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="panel.css">
   </head>
   <body>
 
@@ -52,9 +53,36 @@
 
 
     ?>
+    <header>
+		<div class="logo">Libre<span>ria</span></div>
+	</header>
+	<div class="nav-btn">Menu</div>
+	<div class="container">
+		
+		<div class="sidebar">
+			<nav>
+				<a href="#">Libreria</a>
+				<ul>
+					<li><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li class="active"><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li><a href="adminautor.php">Autores</a></li>
+					<li><a href="closesession.php">Cerrar sesion</a></li>
+				</ul>
+			</nav>
+		</div>
 
-      <form method="post">
-        <fieldset>
+		<div class="main-content">
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
+			<div class="panel-wrapper">
+				<div class="panel-head">
+					Editar Usuario
+				</div>
+				<div class="panel-body">
+        <form method="post">
           <legend>Editar Usuario</legend>
           <span>IDusuario</span><input type="text" name="idusuario" value="<?php echo "$obj->idusuario";?>" disabled><br>
           <span>Usuario </span><input type="text" name="usuario" value="<?php echo "$obj->usuario";?>" required><br>
@@ -64,9 +92,12 @@
           <span>Contraseña </span><input type="text" name="password"><br>
           <button type="submit" name="button">Editar</button>
           <button type="button" onclick="window.location.href='adminuser.php'">Cancelar</button>
-        </fieldset>
-
       </form>
+      </div>
+			</div>
+		</div>
+  </div>
+  
     <?php else : ?>
 
       <?php

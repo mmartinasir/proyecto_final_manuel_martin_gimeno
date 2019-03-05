@@ -28,6 +28,7 @@
 					<li><a href="adminbook.php">Libros</a></li>
 					<li><a href="admineditorial.php">Editoriales</a></li>
 					<li><a href="adminautor.php">Autores</a></li>
+					<li><a href="admipedidos.php">Lista de Pedidos</a></li>
 					<li><a href="closesession.php">Cerrar sesion</a></li>
 				</ul>
 			</nav>

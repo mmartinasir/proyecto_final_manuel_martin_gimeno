@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="panel.css">
   </head>
   <body>
 
@@ -17,9 +17,36 @@
 
     <?php if (!isset($_POST["nombre"])) : ?>
 
-      <form method="post">
-        <fieldset>
-          <legend>Añadir usuario</legend>
+    <header>
+		<div class="logo">Libre<span>ria</span></div>
+	</header>
+	<div class="nav-btn">Menu</div>
+	<div class="container">
+		
+		<div class="sidebar">
+			<nav>
+				<a href="#">Libreria</a>
+				<ul>
+					<li><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li class="active"><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li><a href="adminautor.php">Autores</a></li>
+					<li><a href="closesession.php">Cerrar sesion</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="main-content">
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
+			<div class="panel-wrapper">
+				<div class="panel-head">
+					Añadir Usuario
+				</div>
+				<div class="panel-body">
+        <form method="post">
           <span>Usuario </span><input type="text" name="usuario" required><br>
           <span>Nombre </span><input type="text" name="nombre" required><br>
           <span>Email </span><input type="email" name="email" required><br>
@@ -27,9 +54,12 @@
           <span>Contraseña </span><input type="password" name="password" required><br>
           <button type="submit" name="button">Añadir</button>
           <button type="button" onclick="window.location.href='adminuser.php'">Cancelar</button>
-        </fieldset>
-
       </form>
+      </div>
+			</div>
+		</div>
+	</div>
+
     <?php else : ?>
 
       <?php
