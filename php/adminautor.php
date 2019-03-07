@@ -62,7 +62,7 @@
 			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
-					News
+					Lista de autores
 				</div>
 				<div class="panel-body">
        <form class="" method="post">

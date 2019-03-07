@@ -23,6 +23,7 @@
             exit();
         }
 
+        $_SESSION["idusu"] = $_GET["cod"];
         $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor";
         if (isset($_POST["buscador"]) && isset($_POST['opcion'])) {
         if ($_POST["opcion"]=="titulo" ) {
@@ -66,10 +67,17 @@
 			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
-					News
+					Añadir pedido
 				</div>
 				<div class="panel-body">
-                    
+                <form class="" method="post">
+         <input type="text" name="buscador" required>
+         <input type="submit" name="" value="Buscar">
+         <button type="button" onclick="window.location.href='addpedido.php?cod=$usu'"><span>Mostrar Todos</span></button>
+         <input type="radio" name="opcion" value="titulo"><label> Titulo</label>
+         <input type="radio" name="opcion" value="editorial"><label> Editorial</label>
+         <input type="radio" name="opcion" value="autor"><label> Autor</label><br><br>
+       </form><br><br>
 				</div>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 
     <?php
       session_start();
-      if (!isset($_SESSION["usu"])) {
+      if (!isset($_SESSION["admin"])) {
         header("Location: login.php");
         exit();
       }
@@ -64,24 +64,27 @@
 			<nav>
 				<a href="#">Libreria</a>
 				<ul>
-					<li><a href="userpanel.php">Panel de Usuario</a></li>
+					<li><a href="adminpanel.php">Panel de Administrador</a></li>
 					<li class="active"><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
-					<li><a href="pedidos.php">Mis pedidos</a></li>
-					<li><a href="listbook.php">Libros disponibles</a></li>
+					<li><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li><a href="adminautor.php">Autores</a></li>
 					<li><a href="closesession.php">Cerrar sesion</a></li>
 				</ul>
 			</nav>
 		</div>
 
 		<div class="main-content">
-			<h1>Panel de Usuario</h1>
-			<p>Bienvenido, <?php echo $_SESSION["usu"] ?></p>
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
 					Editar cuenta
 				</div>
 				<div class="panel-body">
-				<form method="post">
+        <form method="post">
+          <legend>Editar Cuenta</legend>
           <span>Nombre </span><input type="text" name="nombre" value="<?php echo "$obj->nombre";?>" required><br>
           <span>Email </span><input type="text" name="email" value="<?php echo "$obj->email";?>" required><br>
           <span>Telefono </span><input type="text" name="telefono" value="<?php echo "$obj->telefono";?>" required><br>

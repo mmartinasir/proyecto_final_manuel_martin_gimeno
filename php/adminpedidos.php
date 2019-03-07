@@ -24,7 +24,7 @@
            exit();
        }
        $query="SELECT * from pedidos join libros on libros.idlibro = pedidos.idlibro join usuarios on usuarios.idusuario = pedidos.idusuario where pedidos.idusuario = ".$_GET["cod"]."";
-
+       $idusu = $_GET["cod"];
        if ($result = $connection->query($query)) {
 
            printf("<p>%d Pedidos encontrados.</p>", $result->num_rows);
@@ -56,7 +56,7 @@
 			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
-					News
+					Pedido
 				</div>
 				<div class="panel-body">
                 <table style="border:1px solid black">

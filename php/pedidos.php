@@ -40,7 +40,7 @@
 			<nav>
 				<a href="#">Libreria</a>
 				<ul>
-					<li><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li><a href="userpanel.php">Panel de Usuario</a></li>
 					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
 					<li class="active"><a href="pedidos.php">Mis pedidos</a></li>
 					<li><a href="listbook.php">Libros disponibles</a></li>

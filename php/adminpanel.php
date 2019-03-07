@@ -23,12 +23,11 @@
 				<a href="#">Libreria</a>
 				<ul>
 					<li class="active"><a href="adminpanel.php">Panel de Administrador</a></li>
-					<li><a href="useredit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li><a href="adminedit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
 					<li><a href="adminuser.php">Lista de usuarios</a></li>
 					<li><a href="adminbook.php">Libros</a></li>
 					<li><a href="admineditorial.php">Editoriales</a></li>
 					<li><a href="adminautor.php">Autores</a></li>
-					<li><a href="admipedidos.php">Lista de Pedidos</a></li>
 					<li><a href="closesession.php">Cerrar sesion</a></li>
 				</ul>
 			</nav>
@@ -39,10 +38,10 @@
 			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
-					News
+					Novedades
 				</div>
 				<div class="panel-body">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam fugiat culpa quia possimus molestiae id sapiente ad eveniet, aliquid, eum sint fuga eius, ratione suscipit ut minus voluptates dicta nesciunt.
+					
 				</div>
 			</div>
 		</div>
