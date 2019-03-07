@@ -70,6 +70,7 @@
     $query="INSERT into autor (nombre, apellidos) values ('".$_POST["name"]."','".$_POST["surname"]."')";
     $buscarnombre = "SELECT * from autor where nombre = '".$_POST["name"]."'";
     $buscarapellido = "SELECT * from autor where apellidos = '".$_POST["surname"]."'";
+    $buscarnombrecompleto = "SELECT * from autor where nombre ='".$_POST["name"]."' and apellidos='".$_POST["surname"]."'";
 
   if ($result = $connection->query($buscarnombre)) {
     $result->num_rows;
@@ -88,11 +89,15 @@
   }
   
   if ($no1 == $no2) {
-    echo "Error: Ya existe ese autor en la base de datos<br>";
-    echo "<button onclick='history.go(-1);'>Volver</button>";
-    exit();
+    if ($result = $connection->query($buscarnombrecompleto)) {
+      $result->num_rows;
+      if ($result->num_rows > 0) {
+        $_SESSION["repe"]=true;
+        header("Location: adminautor.php", true, 301);
+        exit();
+      }
+    }
   }
-
 
   if ($result = $connection->query($query)) {
 

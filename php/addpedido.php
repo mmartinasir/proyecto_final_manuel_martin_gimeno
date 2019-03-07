@@ -12,7 +12,7 @@
         header("Location: login.php");
       }
      ?>
-
+     <?php if (!isset($_POST["usuario"])) : ?>
     <?php
 
         $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
@@ -24,21 +24,6 @@
         }
 
         $_SESSION["idusu"] = $_GET["cod"];
-        $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor";
-        if (isset($_POST["buscador"]) && isset($_POST['opcion'])) {
-        if ($_POST["opcion"]=="titulo" ) {
-            $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where titulo like '%".$_POST["buscador"]."%'";
-        } elseif ($_POST["opcion"]=="editorial") {
-            $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where editorial.Nombre like '%".$_POST["buscador"]."%'";
-        } elseif ($_POST["opcion"]=="autor") {
-            $query="SELECT libros.*, editorial.nombre as editorialnombre, autor.nombre as autornombre, autor.apellidos as autorapellido from libros join editorial on editorial.ideditorial = libros.ideditorial join autor on autor.idautor = libros.idautor where autor.Nombre like '%".$_POST["buscador"]."%'";
-        }
-        };
-
-        if ($result = $connection->query($query)) {
-
-            printf("<p>%d Libros encontrados.</p>", $result->num_rows);
-        }
     ?>
     <header>
 		<div class="logo">Libre<span>ria</span></div>
@@ -67,20 +52,70 @@
 			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
 			<div class="panel-wrapper">
 				<div class="panel-head">
-					Añadir pedido
+					Añadir pedido a usuario
 				</div>
 				<div class="panel-body">
                 <form class="" method="post">
-         <input type="text" name="buscador" required>
-         <input type="submit" name="" value="Buscar">
-         <button type="button" onclick="window.location.href='addpedido.php?cod=$usu'"><span>Mostrar Todos</span></button>
-         <input type="radio" name="opcion" value="titulo"><label> Titulo</label>
-         <input type="radio" name="opcion" value="editorial"><label> Editorial</label>
-         <input type="radio" name="opcion" value="autor"><label> Autor</label><br><br>
+                <label for="usuario">Usuarios</label>
+                <select name="usuario">
+            <?php $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
+            $connection->set_charset("uft8");
+
+            if ($connection->connect_errno) {
+                printf("Connection failed: %s\n", $connection->connect_error);
+                exit();
+            }
+
+            $query="SELECT * from usuarios where rol = 'cliente'";
+
+            if ($result = $connection->query($query)) {
+
+                $result->num_rows;
+
+                while($obj = $result->fetch_object()) {
+                    echo "<option value='".$obj->idusuario."'>".$obj->usuario."</option>";
+                }
+
+            }
+          ?>
+        </select>
+        <button type="submit" name="button">Añadir</button>
        </form><br><br>
 				</div>
 			</div>
 		</div>
 	</div>
+    <?php else : ?>
+
+    <?php
+
+    $connection = new mysqli("localhost", "root", "Admin2015", "libreria");
+    $connection->set_charset("uft8");
+
+    if ($connection->connect_errno) {
+        printf("Connection failed: %s\n", $connection->connect_error);
+        exit();
+    }
+
+    $repetido = "SELECT * from pedidos where idlibro = ".$_GET["cod"]." and idusuario = ".$_POST["usuario"]."";
+    $query="INSERT into pedidos (idlibro, idusuario, fecha_pedido) values (".$_GET["cod"].", ".$_POST["usuario"].", curdate())";
+
+    if ($result = $connection->query($repetido)) {
+      $result->num_rows;
+    }
+    if ($result->num_rows > 0) {
+        $_SESSION["repe"]=true;
+        header("Location: adminbook.php", true, 301);
+        exit();
+    }
+
+    if ($result = $connection->query($query)) {
+        $_SESSION["pedido"]=true;
+        header("Location: adminbook.php", true, 301);
+        exit();
+    }
+   ?>
+
+    <?php endif ?>
   </body>
 </html>

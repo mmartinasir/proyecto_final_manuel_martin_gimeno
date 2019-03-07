@@ -126,9 +126,9 @@
       if ($result = $connection->query($buscarusuario2)) {
         $obj = $result->fetch_object();
         if ($obj->usuario != $_POST["usuario"]) {
-          echo "Error: El usuario ya existe<br>";
-          echo "<button onclick='history.go(-1);'>Volver</button>";
-          exit();
+          $_SESSION["repeusu"]=true;
+        header("Location: adminuser.php", true, 301);
+        exit();
         }
       }
     }
@@ -140,9 +140,9 @@
       if ($result = $connection->query($buscaremail2)) {
         $obj = $result->fetch_object();
         if ($obj->email != $_POST["email"]) {
-          echo "Error: El email esta siendo utilizado por otro usuario<br>";
-          echo "<button onclick='history.go(-1);'>Volver</button>";
-          exit();
+          $_SESSION["repemail"]=true;
+        header("Location: adminuser.php", true, 301);
+        exit();
         }
       }
     }

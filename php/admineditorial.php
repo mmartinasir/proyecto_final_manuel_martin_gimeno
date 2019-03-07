@@ -69,6 +69,14 @@
          <button type="button" onclick="window.location.href='admineditorial.php'"><span>Mostrar Todos</span></button><br><br>
          <button type="button" onclick="window.location.href='addeditorial.php'"><span>Nueva Editorial</span></button>
        </form><br><br>
+       <div><?php 
+
+                if (isset($_SESSION["repe"])) {
+                  echo "<script type='text/javascript'>alert('Ya existe esa editorial en la base de datos');</script>";
+                  unset($_SESSION["repe"]);
+                }                 
+              ?>
+        </div>
       <table style="border:1px solid black">
       <thead>
         <tr>

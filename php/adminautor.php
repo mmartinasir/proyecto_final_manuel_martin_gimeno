@@ -73,6 +73,15 @@
          <input type="radio" name="opcion" value="apellidos"><label> Apellidos</label><br><br>
          <button type="button" onclick="window.location.href='addautor.php'"><span>Nuevo autor</span></button>
        </form><br><br>
+       <div><?php 
+
+                if (isset($_SESSION["repe"])) {
+                  echo "<script type='text/javascript'>alert('Ya existe ese autor en la base de datos');</script>";
+                  unset($_SESSION["repe"]);
+                }
+                  
+              ?>
+        </div>
       <table style="border:1px solid black">
       <thead>
         <tr>

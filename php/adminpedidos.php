@@ -59,6 +59,7 @@
 					Pedido
 				</div>
 				<div class="panel-body">
+        <br><br>
                 <table style="border:1px solid black">
                 <thead>
                     <tr>

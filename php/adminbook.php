@@ -83,6 +83,25 @@
          <button type="button" onclick="window.location.href='addbook.php'"><span>Nuevo libro</span></button>
 
        </form><br><br>
+       <div><?php 
+
+                if (isset($_SESSION["repe"])) {
+                  echo "<script type='text/javascript'>alert('El usuario ya tiene un pedido con ese libro');</script>";
+                  unset($_SESSION["repe"]);
+                }
+
+                if (isset($_SESSION["pedido"])) {
+                  echo "<script type='text/javascript'>alert('Pedido realizado con exito');</script>";
+                  unset($_SESSION["pedido"]);
+                }
+
+                if (isset($_SESSION["repebook"])) {
+                  echo "<script type='text/javascript'>alert('El libro ya existe en la base de datos');</script>";
+                  unset($_SESSION["repebook"]);
+                }
+                  
+              ?>
+        </div>
 
 
       <table style="border:1px solid black">
@@ -95,6 +114,7 @@
           <th>Editorial</th>
           <th>Editar</th>
           <th>Borrar</th>
+          <th>Añadir a pedido</th>
       </thead>
 				</div>
 			</div>
@@ -114,6 +134,8 @@
                 echo "<td>".$obj->editorialnombre."</td>";
                 echo "<td>"."<a href='editbook.php?cod=$obj->idlibro'>"."<img src='../img/edit.png' style='width:40px;height:40px'>"."</td>";
                 echo "<td>"."<a href='delbook.php?cod=$obj->idlibro'>"."<img src='../img/delete.png' style='width:40px;height:40px'>"."</td>";
+                echo "<td>"."<a href='addpedido.php?cod=$obj->idlibro'>"."<img src='../img/add.png' style='width:40px;height:40px'>"."</td>";
+
               echo "</tr>";
           }
 

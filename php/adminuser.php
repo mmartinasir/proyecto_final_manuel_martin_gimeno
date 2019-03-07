@@ -78,6 +78,31 @@
 
        </form><br><br>
 
+       <div><?php 
+
+                if (isset($_SESSION["repe"])) {
+                  echo "<script type='text/javascript'>alert('El usuario ya tiene un pedido con ese libro');</script>";
+                  unset($_SESSION["repe"]);
+                }
+
+                if (isset($_SESSION["pedido"])) {
+                  echo "<script type='text/javascript'>alert('Pedido realizado con exito');</script>";
+                  unset($_SESSION["pedido"]);
+                }
+
+                if (isset($_SESSION["repeusu"])) {
+                  echo "<script type='text/javascript'>alert('Ya existe ese usuario en la base de datos');</script>";
+                  unset($_SESSION["repeusu"]);
+                }
+
+                if (isset($_SESSION["repemail"])) {
+                  echo "<script type='text/javascript'>alert('El email esta siendo utilizado por otro usuario');</script>";
+                  unset($_SESSION["repemail"]);
+                }
+                  
+              ?>
+        </div>
+
 
       <table style="border:1px solid black">
       <thead>

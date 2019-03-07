@@ -184,8 +184,8 @@
     if ($result = $connection->query($buscartitulo)) {
       $result->num_rows;
       if ($result->num_rows > 0) {
-        echo "Error: Ese libro ya existe en la base de datos<br>";
-        echo "<button onclick='history.go(-1);'>Volver</button>";
+        $_SESSION["repebook"]=true;
+        header("Location: adminbook.php", true, 301);
         exit();
       }
   }

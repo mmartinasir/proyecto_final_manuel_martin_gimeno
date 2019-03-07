@@ -83,9 +83,9 @@
     };
 
     if ($result->num_rows > 0) {
-      echo "Error: El usuario ya existe<br>";
-      echo "<button onclick='history.go(-1);'>Volver</button>";
-      exit();
+      $_SESSION["repeusu"]=true;
+        header("Location: adminuser.php", true, 301);
+        exit();
     };
 
     if ($result = $connection->query($buscaremail)) {
@@ -93,9 +93,9 @@
     };
 
     if ($result->num_rows > 0) {
-      echo "Error: El email está siendo utilizado por otro usuario<br>";
-      echo "<button onclick='history.go(-1);'>Volver</button>";
-      exit();
+      $_SESSION["repemail"]=true;
+        header("Location: adminuser.php", true, 301);
+        exit();
     };
 
     if ($result = $connection->query($query)) {

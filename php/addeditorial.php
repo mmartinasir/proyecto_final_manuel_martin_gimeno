@@ -75,9 +75,9 @@
       $result->num_rows;
     }
     if ($result->num_rows > 0) {
-      echo "Error: la editorial ya existe en la base de datos<br>";
-      echo "<button onclick='history.go(-1);'>Volver</button>";
-      exit();
+      $_SESSION["repe"]=true;
+        header("Location: admineditorial.php", true, 301);
+        exit();
     }
 
     if ($result = $connection->query($query)) {

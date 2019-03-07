@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="panel.css">
   </head>
   <body>
 
@@ -43,18 +44,46 @@
 
 
     ?>
+    <header>
+		<div class="logo">Libre<span>ria</span></div>
+	</header>
+	<div class="nav-btn">Menu</div>
+	<div class="container">
+		
+		<div class="sidebar">
+			<nav>
+				<a href="#">Libreria</a>
+				<ul>
+					<li class="active"><a href="adminpanel.php">Panel de Administrador</a></li>
+					<li><a href="adminedit.php?cod=<?php echo $_SESSION['id']?>">Editar Cuenta</a></li>
+					<li><a href="adminuser.php">Lista de usuarios</a></li>
+					<li><a href="adminbook.php">Libros</a></li>
+					<li><a href="admineditorial.php">Editoriales</a></li>
+					<li><a href="adminautor.php">Autores</a></li>
+					<li><a href="closesession.php">Cerrar sesion</a></li>
+				</ul>
+			</nav>
+		</div>
 
+		<div class="main-content">
+			<h1>Panel de Administrador</h1>
+			<p>Bienvenido, <?php echo $_SESSION["admin"] ?></p>
+			<div class="panel-wrapper">
+				<div class="panel-head">
+					Añadir Autor
+				</div>
+				<div class="panel-body">
       <form method="post">
-        <fieldset>
-          <legend>Editar Autor</legend>
           <span>IDautor</span><input type="text" name="idautor" value="<?php echo "$obj->idautor";?>" disabled><br>
           <span>Nombre</span><input type="text" name="name" value="<?php echo "$obj->nombre";?>" required><br>
           <span>Apellidos</span><input type="text" name="surname" value="<?php echo "$obj->apellidos";?>" required><br>
           <button type="submit" name="button">Editar</button>
           <button type="button" onclick="window.location.href='adminautor.php'">Cancelar</button>
-        </fieldset>
-
       </form>
+				</div>
+			</div>
+		</div>
+	</div>
     <?php else : ?>
 
       <?php
@@ -104,9 +133,9 @@
       if ($result = $connection->query($buscarnombrecompleto)) {
         $result->num_rows;
         if ($result->num_rows > 0) {
-        echo "Error: El autor ya existe en la base de datos<br>";
-        echo "<button onclick='history.go(-1);'>Volver</button>";
-        exit();
+          $_SESSION["repe"]=true;
+          header("Location: adminautor.php", true, 301);
+          exit();
         }
       }
     }
